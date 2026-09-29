@@ -1,6 +1,8 @@
 package Ejemplo1.listadodirectorio;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,11 +23,35 @@ public class ListadoDirectorio {
             }
             file.mkdirs();
             File file2 = new File(rutaDirectorio + "Mifichero.txt");
+            String texto = "Ser o no ser, esa es la cuestión.\n" +
+                    "¿Qué es más noble para el alma?\n" +
+                    "¿Soportar los golpes y flechas de la desdicha,\n" +
+                    "o tomar las armas contra un mar de problemas\n" +
+                    "y, enfrentándolos, acabar con ellos?\n" +
+                    "Morir, dormir, nada más. Y con un sueño\n" +
+                    "poner fin al tormento del corazón\n" +
+                    "y a los mil dolores que son el destino de la carne.\n" +
+                    "Es una conclusión que hay que desear.\n" +
+                    "Morir, dormir. Dormir, tal vez soñar;\n" +
+                    "sí, ahí está el obstáculo, porque en ese sueño de muerte,\n" +
+                    "cuando hayamos dejado atrás el ruido del mundo,\n" +
+                    "¿qué sueños pueden venir? Esa duda\n" +
+                    "es lo que nos detiene y da larga vida\n" +
+                    "a las desgracias. Porque, ¿quién soportaría\n" +
+                    "los latigazos y burlas del tiempo,\n" +
+                    "la opresión del poderoso, las injurias del soberbio,\n" +
+                    "las punzadas del amor despreciado,\n" +
+                    "las demoras de la justicia, la arrogancia del poder\n" +
+                    "y el desprecio que el mérito paciente recibe del indigno,\n" +
+                    "cuando uno mismo podría encontrar reposo\n" +
+                    "con un simple puñal?";
             try {
                 if (file2.exists()){
                     throw new Exception("El archivo ya existe.");
                 }
-                file2.createNewFile();
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file2));
+                bufferedWriter.write(texto);
+                bufferedWriter.close();
                 System.out.println("Fichero creado en la ruta: " + file2.getPath());
             } catch (IOException e) {
                 System.err.println("Error de entrada/salida.");
