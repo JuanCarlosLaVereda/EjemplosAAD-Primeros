@@ -12,19 +12,33 @@ public class ListadoDirectorio {
         if(args.length>=1) ruta=args[0];
         File fich=new File(ruta);
 
-        String rutaDirectorio = "Ejemplo1Ejercicio2/Nivel1/Nivel2/";
+        //Ejercicio 2
+        String rutaDirectorio = System.getProperty("user.home") + "/Ejemplo1Ejercicio2/Nivel1/Nivel2/";
         File file = new File(rutaDirectorio);
-        file.mkdirs();
-        File file2 = new File(rutaDirectorio + "Mifichero.txt");
         try {
-            file2.createNewFile();
-            System.out.println("Fichero creado en la ruta: " + file2.getPath());
-        } catch (IOException e) {
-            System.err.println("Error de entrada salida.");
+            if (file.exists()){
+                throw new Exception("La ruta de los directorios ya existe");
+            }
+            file.mkdirs();
+            File file2 = new File(rutaDirectorio + "Mifichero.txt");
+            try {
+                if (file2.exists()){
+                    throw new Exception("El archivo ya existe.");
+                }
+                file2.createNewFile();
+                System.out.println("Fichero creado en la ruta: " + file2.getPath());
+            } catch (IOException e) {
+                System.err.println("Error de entrada/salida.");
+                e.printStackTrace();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }catch (Exception e){
             e.printStackTrace();
+            e.getMessage();
         }
 
-
+        //Ejercicio 1
         if(!fich.exists()) {
             System.out.println("No existe el fichero o directorio ("+ruta+").");
         }
